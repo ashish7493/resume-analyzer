@@ -97,10 +97,10 @@ def main():
         st.subheader("🔍 Analysis Options")
         analysis_type = st.radio(
             "Choose analysis type:",
-            ["Detailed Resume Review", "Match Percentage Analysis"]
+            ["Detailed Resume Review","Questions based on your Role", "Match Percentage Analysis"]
         )
 
-        if st.button("Analyze Resume"):
+        if st.button("Analyze Resume/ Get Questions"):
             with st.spinner("Analyzing your resume... Please wait"):
                 # Extract PDF text
                 pdf_text = ATSAnalyzer.extract_text_from_pdf(uploaded_file)
@@ -118,7 +118,16 @@ def main():
                         5. Final verdict on suitability for the role
                         
                         Format the response with clear headings and professional language.
+                    
                         """
+                    elif analysis_type=="Questions based on your Role":
+                        prompt="""
+                            As an experienced question setter for interview, provide 15 questions to prepare
+                            for and most expected in interview from the resume and the role mentioned in JD.
+                            If you think that there is any logical question or aptitude question you can ask that also.
+                            Also provide the best possible answer in last for each question so that one can easily 
+                            go through according to the role and resume"""
+
                     else:
                         prompt = """
                         As an ATS (Applicant Tracking System) expert, provide:
@@ -150,12 +159,7 @@ def main():
     else:
         st.info("👆 Please upload your resume and provide the job description to begin the analysis.")
 
-    # Footer
-    st.markdown("---")
-    st.markdown(
-        "Made with ❤️ by Ashish "
-        "This tool uses AI to analyze resumes but should be used as one of many factors in your job application process."
-    )
+   
 
 if __name__ == "__main__":
     main()
