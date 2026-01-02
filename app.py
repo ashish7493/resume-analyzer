@@ -13,7 +13,7 @@ class ATSAnalyzer:
     @staticmethod
     def get_gemini_response(input_prompt, pdf_text, job_description):
         try:
-            model = genai.GenerativeModel('gemini-3-pro-preview')
+            model = genai.GenerativeModel('gemini-2.5-flash')
             response = model.generate_content([input_prompt, pdf_text, job_description])
             return response.text
         except Exception as e:
